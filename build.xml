@@ -17,9 +17,9 @@
         </copy>
 
         <!-- Removed javac because no src folder -->
-        <war destfile="dist/static-app.war" webxml="WebContent/WEB-INF/web.xml">
-            <fileset dir="build"/>
-        </war>
+        <war destfile="dist/static-app.war">
+    <fileset dir="build"/>
+    </war>
     </target>
 
 </project>
