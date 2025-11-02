@@ -1,29 +1,22 @@
 <?xml version="1.0"?>
 <project name="static-app" basedir="." default="build">
 
-    <!-- Clean previous builds -->
     <target name="clean">
         <delete dir="build"/>
         <delete dir="dist"/>
     </target>
 
-    <!-- Build WAR file -->
     <target name="build">
-        <!-- Create directories -->
         <mkdir dir="build"/>
         <mkdir dir="build/WEB-INF"/>
         <mkdir dir="build/WEB-INF/classes"/>
         <mkdir dir="dist"/>
 
-        <!-- Copy web content -->
         <copy todir="build">
             <fileset dir="WebContent"/>
         </copy>
 
-        <!-- Compile Java source files -->
-        <javac srcdir="src" destdir="build/WEB-INF/classes" includeantruntime="false"/>
-
-        <!-- Create WAR file -->
+        <!-- Removed javac because no src folder -->
         <war destfile="dist/static-app.war" webxml="WebContent/WEB-INF/web.xml">
             <fileset dir="build"/>
         </war>
