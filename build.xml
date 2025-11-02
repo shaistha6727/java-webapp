@@ -9,7 +9,10 @@
 
     <!-- Build WAR file -->
     <target name="build">
+        <!-- Create directories -->
         <mkdir dir="build"/>
+        <mkdir dir="build/WEB-INF"/>
+        <mkdir dir="build/WEB-INF/classes"/>
         <mkdir dir="dist"/>
 
         <!-- Copy web content -->
