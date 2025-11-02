@@ -1,27 +1,23 @@
-<?xml version="1.0"?>
-<project name="static-app" basedir="." default="build">
+<project name="static-app" default="build">
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
 
     <target name="clean">
-        <delete dir="build"/>
-        <delete dir="dist"/>
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
     </target>
 
     <target name="build">
-        <mkdir dir="build"/>
-        <mkdir dir="build/WEB-INF"/>
-        <mkdir dir="build/WEB-INF/classes"/>
-        <mkdir dir="dist"/>
-
-        <copy todir="build">
-            <fileset dir="WebContent"/>
+        <mkdir dir="${build}"/>
+        <mkdir dir="${dist}"/>
+        <copy todir="${build}">
+            <fileset dir="${src}"/>
         </copy>
 
-        <!-- Removed javac because no src folder -->
-        <war destfile="dist/static-app.war">
-    <fileset dir="build"/>
-    </war>
+        <war destfile="${dist}/static-app.war" needxmlfile="false">
+            <fileset dir="${build}"/>
+        </war>
     </target>
-
 </project>
-
 
