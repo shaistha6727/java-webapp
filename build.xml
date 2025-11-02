@@ -1,23 +1,27 @@
-<project name="static-app" default="build">
-    <property name="src" location="src"/>
-    <property name="build" location="build"/>
-    <property name="dist" location="dist"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Static Web App Build" default="build" basedir=".">
 
     <target name="clean">
-        <delete dir="${build}"/>
-        <delete dir="${dist}"/>
+        <delete dir="build" />
+        <delete dir="dist" />
     </target>
 
     <target name="build">
-        <mkdir dir="${build}"/>
-        <mkdir dir="${dist}"/>
-        <copy todir="${build}">
-            <fileset dir="${src}"/>
+        <!-- Make directories -->
+        <mkdir dir="build" />
+        <mkdir dir="build/WEB-INF" />
+        <mkdir dir="dist" />
+
+        <!-- Copy static files (HTML, CSS, JS) -->
+        <copy todir="build">
+            <fileset dir="." excludes="build.xml, build/**, dist/**" />
         </copy>
 
-        <war destfile="${dist}/static-app.war" needxmlfile="false">
-            <fileset dir="${build}"/>
+        <!-- Create WAR file -->
+        <war destfile="dist/static-app.war" webxml="web/WEB-INF/web.xml" needxmlfile="false">
+            <fileset dir="build" />
         </war>
     </target>
+
 </project>
 
