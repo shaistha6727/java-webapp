@@ -1,38 +1,21 @@
-<?xml version="1.0"?>
-<project name="MyWebApp" default="build" basedir=".">
-  
-  <!-- Set properties -->
-  <property name="src.dir" value="src"/>
-  <property name="web.dir" value="WebContent"/>
-  <property name="build.dir" value="build"/>
-  <property name="war.dir" value="dist"/>
-  <property name="war.name" value="mywebapp.war"/>
+<project name="StaticWebApp" default="build" basedir=".">
+    <property name="web" value="web" />
+    <property name="build" value="build" />
+    <property name="dist" value="dist" />
 
-  <!-- Clean old builds -->
-  <target name="clean">
-    <delete dir="${build.dir}"/>
-    <delete dir="${war.dir}"/>
-  </target>
+    <target name="clean">
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
+    </target>
 
-  <!-- Compile Java files -->
-  <target name="compile">
-    <mkdir dir="${build.dir}/WEB-INF/classes"/>
-    <javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" includeantruntime="false" />
-  </target>
-
-  <!-- Copy WebContent -->
-  <target name="copy">
-    <mkdir dir="${build.dir}"/>
-    <copy todir="${build.dir}">
-      <fileset dir="${web.dir}" excludes="WEB-INF/classes/**"/>
-    </copy>
-  </target>
-
-  <!-- Build WAR -->
-  <target name="build" depends="clean, compile, copy">
-    <mkdir dir="${war.dir}"/>
-    <war destfile="${war.dir}/${war.name}" webxml="${build.dir}/WEB-INF/web.xml" basedir="${build.dir}"/>
-  </target>
-
+    <target name="build">
+        <mkdir dir="${build}" />
+        <copy todir="${build}">
+            <fileset dir="${web}" />
+        </copy>
+        <mkdir dir="${dist}" />
+        <jar destfile="${dist}/static-app.war" basedir="${build}" />
+    </target>
 </project>
+
 
